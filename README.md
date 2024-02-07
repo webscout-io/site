@@ -88,13 +88,13 @@ Fingerprints are instrumental in the identification, categorization, and trackin
 
 Views are the user interfaces that display the results (the *Artefacts*) from your searches. Views are designed to organize and present the most relevant information about the searched selector. As such, each searchable selector (currently URLs, Domain Names, and IP-addresses) has its own dedicated **View** which you are automatically directed to upon conducting a search.  
 
-![[Pasted image 20240131164523.png]]
+![Screenshot 2024-01-31 164504](https://github.com/webscout-io/site/assets/47919173/d43583a7-23a1-4a3f-98a0-daef17352892)
 _URL View_
 
-![[Pasted image 20240131164925.png]]
+![Screenshot 2024-01-31 164920](https://github.com/webscout-io/site/assets/47919173/23524999-471e-4308-ab0f-9406d2867b6f)
 _Domain View_
 
-![[Pasted image 20240131165819.png]]
+![Screenshot 2024-01-31 165812](https://github.com/webscout-io/site/assets/47919173/aa1d89cd-ed50-48fe-8737-41cdc32a9c9a)
 _IP-address View_
 
 Views are designed to streamline the process of shifting between the different Artefacts of relevance to your investigation. They seek to make it  easy and intuitive to pivot and connect otherwise seemingly unrelated systems on the internet. 
