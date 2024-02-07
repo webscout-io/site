@@ -173,6 +173,8 @@ This value is a [perceptual hash](https://www.hackerfactor.com/blog/index.php?/a
 This value is a [perceptual hash](https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html) of the screenshot that our bot captured of the searched URL. A perceptual hash, often abbreviated as "pHash," is a type of algorithm designed to produce a hash value of digital media files (most commonly images and videos) in a way that reflects the content's perceptual features. This means that (closely) similar looking media files will produce  identical hash values, even if there are minor variations in the files due to compression, resizing, or other forms of mild distortion. Our implementation uses [this library](https://pkg.go.dev/github.com/corona10/goimagehash#section-readme) which adopts the implementation described in the article linked above. 
 
 ### Inline Resources
+This section displays information about the searched URL's inline resources. 
+
 An inline resource on a webpage refers to any content that is directly embedded or included within the HTML document, as opposed to being loaded from an external file through a link. These resources can be part of the HTML structure itself or included through specific tags that reference external sources but are treated as an integral part of the page's content. The code snippet you provided is designed to scan an HTML document and identify various types of inline resources by examining the HTML nodes and their attributes.
 
 _Type_
@@ -209,16 +211,47 @@ _Simhash_
 This is the simhash of the resource in question. Again, a [GO-implementation](https://github.com/mfonda/simhash) of [Charikar's simhash algorithm](https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/CharikarEstim.pdf) is used to generate the hash to provide a standardize fingerprint of the resource artefact. 
 
 _Relations_
-This number denotes how many Selectors (ref xx.) this particular Resource artefact has been observed on based on its SHA256-value. Clicking the number will open a pane that displays where exactly Webscout has observed the resource. 
-
+This number indicates how many Selectors (ref xx.) this particular Resource artefact has been observed on (based on its SHA256-value). Clicking the number will open a pane that displays where exactly Webscout has observed the resource. 
 
 ### Requests
+This section details requests for external resources initiated by visiting the provided URL through a browser. In this context, "external" just means that the request was made to "somewhere else" on the web, in contrast to the Inline Resources described previously (xx). This includes resources from different subdomains or URLs, even if they belong to the same domain as the provided URL.
+
+Why would one want to pay attention to the requests a URL makes upon loading it? Here is a short list of examples. 
+
+- **Phishing and Scams:** A site might load stylesheets and images that mimic a legitimate site to deceive users into disclosing sensitive information.
+- **Resource Abuse:** Some sites may load cryptomining scripts or unwanted software, using the visitor's resources without consent.
+- **Third-party Vulnerabilities:** Reliance on compromised or malicious third-party resources can make otherwise benign sites vectors for attack.
+
+It's crucial to understand that the requests listed in this section reflect those observed when the URL is accessed via a browser under standard conditions. Requests that result from more complex interactions, such as submitting forms or activating webhooks, are not included in this overview.... yet 🤫([suspenseful music](https://www.youtube.com/watch?v=j2d6T5G2rrY)). 
 
 _Method_
+The [HTTP request method](https://en.wikipedia.org/wiki/HTTP#Request_methods) observed in the connection to the external resource. The most common one (by far) is `GET`, followed by `POST`, `HEAD`, `PUT`, etc.
 
 _Status_
+The HTTP response status code observed in the request to the external resource that was requested. 
+
+- `1XX` - I have never seen this before so it probably doesn't matter ¯\\_(ツ)_/¯
+- `2XX` - The request was successful
+- `3XX` - The request got redirected
+- `4XX` - Client error
+- `5XX` - Server error
 
 _Resource_
+The name of the resource that was requested as indicated by the final part of the full URL in the request to the external resource. From Mozilla's web docs: 
+
+> The target of an HTTP request is called a "resource", whose nature isn't defined further; it can be a document, a photo, or anything else. Each resource is identified by a Uniform Resource Identifier ([URI](https://developer.mozilla.org/en-US/docs/Glossary/URI)) used throughout HTTP for identifying resources. ([Source](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Identifying_resources_on_the_Web))
+
+*Domain* 
+The domain hosting the external resource that was requested. 
+
+*Mime* 
+The the MIME type associated with the external resource that requested. This is determined by the HTTP response; not some magic file analysis on our end.  
+
+*Size* 
+This is the size (in bytes) of  the external resource that was requested. Importantly, it is not the size "on the wire", which would be slightly bigger as a result of TCP and TLS overhead. Size is derived from the `Content-Length` header in the HTTP response ([ref](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length)).
+
+IP
+This is the IP-address that hosts the domain that the external resource was requested from; the domain's [DNS A record](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/). 
 
 ### Page Extracts
 
