@@ -88,13 +88,13 @@ Fingerprints are instrumental in the identification, categorization, and trackin
 
 Views are the user interfaces that display the results (the *Artefacts*) from your searches. Views are designed to organize and present the most relevant information about the searched selector. As such, each searchable selector (currently URLs, Domain Names, and IP-addresses) has its own dedicated **View** which you are automatically directed to upon conducting a search.  
 
-![Screenshot 2024-01-31 164504](https://github.com/webscout-io/site/assets/47919173/12ccc225-521f-408f-ba1d-7f0dc583b7dc)
+![[Pasted image 20240131164523.png]]
 _URL View_
 
-![Screenshot 2024-01-31 164920](https://github.com/webscout-io/site/assets/47919173/88a9f487-044d-4f62-92fd-5caee2555973)
+![[Pasted image 20240131164925.png]]
 _Domain View_
 
-![Screenshot 2024-01-31 165812](https://github.com/webscout-io/site/assets/47919173/8a048996-5ec8-48a9-a872-77b0fe3cb8e1)
+![[Pasted image 20240131165819.png]]
 _IP-address View_
 
 Views are designed to streamline the process of shifting between the different Artefacts of relevance to your investigation. They seek to make it  easy and intuitive to pivot and connect otherwise seemingly unrelated systems on the internet. 
@@ -123,10 +123,14 @@ This score is derived from our AI model, which utilizes [Gradient Boosting](http
 
 The score is still highly experimental and should not be regarded as a source of truth. A low Phishing Probability score does _NOT_ definitively confirm the safety of the URL you have searched.
 
-
-
 #### Fingerprints
-In the realm of OSINT and cyber threat intelligence, web fingerprints play an important role in identifying, tracking, and understanding digital threats. These fingerprints are unique identifiers - typically hashes of specific web artefacts such as HTTP request headers or TLS configuration - that can be used to detect patterns and cluster groups of potentially related infrastructure. It is our goal to make these fingerprints pivotable to make it easy and intuitive to hunt threats in cyberspace. 
+In the (web) tech world, particularly in search engine optimization (SEO) and web analysis, the term "fingerprints" often refers to the unique digital trace left by a user when visiting a website or application. This is commonly known as a "browser fingerprint" or, more broadly, a "[device fingerprint](https://en.wikipedia.org/wiki/Device_fingerprint)". They include details that can be derived from the user agent, such as the device's operating system and browser type, and details that can be derived by client-side scripts, such as the client's screen resolution, installed fonts, and plugins, among others. These elements combine to create a unique identifier for the device, allowing websites to recognize return visits or track users across different sites, often without the need for cookies.
+
+In Webscout and in OSINT/CTI more generally, web fingerprints serve a significantly different purpose. They are not about tracking user behavior but rather about identifying and analyzing the digital footprint of internet-connected systems. In this context, "fingerprints" refer to the unique set of characteristics of a system connected to the internet. This could include specific configurations, open ports, running services, and even the versions of software that are being used. Tools like Shodan and Censys are popular search engines that leverage these kinds of fingerprints. They use data like HTTP header hashes, SSL certificate details, and other unique identifiers to index and search for devices across the internet. This allows researchers and cybersecurity professionals to find systems with specific vulnerabilities or configurations.
+
+Clearly, web fingerprints are crucial for identifying, tracking, and understanding digital threats. They allow for the detection of patterns and clustering of potentially related infrastructure, aiding in the identification of malicious activities and actors. For instance, unique hashes of a server's distinct TLS configuration can serve as identifiers for tracking and analyzing threat actors' infrastructure.
+
+Webscout, and similar platforms in the cyber threat intelligence domain, focus on providing comprehensive views for analyzing these fingerprints. By facilitating flexible pivoting around important fingerprints, they aim to simplify and enhance the process of identifying patterns in internet systems and hunting for threats in cyberspace. This approach underlines the critical role of web fingerprints in cybersecurity, beyond the user tracking implications in SEO and web analysis, highlighting their value in defending against and understanding cyber threats.
 
 ##### HTTP Fingerprint
 This value is a SHA256 hash of the HTTP response headers from the web server that hosts the URL. To keep the fingerprint as robust as possible, we omit headers with highly variable value fields, such as timestamps, since inclusion of these would make it impossible to group otherwise related infrastructure. We currently omit the following headers: 
@@ -139,7 +143,7 @@ If-Modified-Since
 Last-Modified
 Set-Cookie
 ```
-If you have any suggestions or feedback for which headers we should include in this fingerprint, please do not hesitate to reach out or make an issue.
+If you have any suggestions or feedback for which headers we should include in this fingerprint, please do not hesitate to reach out or make an issue. 🤙 
 
 ##### Server JARM
 This value is the JARM-fingerprint of the IP-address that the scanned URL's domain name points to (the DNS A-record associated with the domain). JARM is a web fingerprinting technique that probes a host’s TLS implementation. It is a hybrid fuzzy hash generated by examining attributes in TLS Server Hello responses resulting from 10 different TLS Client Hello packets sent from the client to the host. JARM hashes can be used to identify clusters of potentially related  servers on the internet. For example, if a certain type of malware/ C2 framework uses a particular out-of-the-box TLS configuration, JARM can help identify other servers that might be part of the same C2 network. JARM was developed by [Salesforce’s engineering team](https://engineering.salesforce.com/easily-identify-malicious-servers-on-the-internet-with-jarm-e095edac525a/) in 2020.  
@@ -169,14 +173,44 @@ This value is a [perceptual hash](https://www.hackerfactor.com/blog/index.php?/a
 This value is a [perceptual hash](https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html) of the screenshot that our bot captured of the searched URL. A perceptual hash, often abbreviated as "pHash," is a type of algorithm designed to produce a hash value of digital media files (most commonly images and videos) in a way that reflects the content's perceptual features. This means that (closely) similar looking media files will produce  identical hash values, even if there are minor variations in the files due to compression, resizing, or other forms of mild distortion. Our implementation uses [this library](https://pkg.go.dev/github.com/corona10/goimagehash#section-readme) which adopts the implementation described in the article linked above. 
 
 ### Inline Resources
+An inline resource on a webpage refers to any content that is directly embedded or included within the HTML document, as opposed to being loaded from an external file through a link. These resources can be part of the HTML structure itself or included through specific tags that reference external sources but are treated as an integral part of the page's content. The code snippet you provided is designed to scan an HTML document and identify various types of inline resources by examining the HTML nodes and their attributes.
 
 _Type_
+Webscout currently fingerprints the following Inline Resource types:
+
+1. **Audio**: This type is identified by the `audio` tag. Audio resources are embedded directly within the webpage, allowing users to listen to audio content without needing to navigate away from the page.
+    
+2. **Embedded**: Identified by the `embed` and `iframe` tags, embedded resources are used to include or embed other content within a webpage, such as videos, interactive content, or external webpages.
+    
+3. **Image**: The `img` and `input` tags (the latter likely referring to image inputs, such as buttons) are used to include images as inline resources. These are visual elements displayed as part of the webpage.
+    
+4. **Script**: Identified by the `script` tag, script resources are crucial for adding interactivity, functionality, and dynamic content to webpages through JavaScript or other scripting languages.
+    
+5. **Stylesheet**: This type is specific to CSS stylesheets, which define the look and layout of a webpage. They are linked via the `link` tag with a `rel` attribute value of "stylesheet".
+    
+6. **Icon**: Also identified through the `link` tag with a `rel` attribute of "icon", these resources represent the favicon or website icon displayed in browser tabs and bookmarks.
+    
+7. **Author**: Links to a webpage specifying the author of the document, identified by a `rel` attribute of "author" in the `link` tag.
+    
+8. **Help**: This type links to a help document, indicated by a `rel` attribute of "help" in the `link` tag.
+    
+9. **Search**: Represents a link to a search tool or engine for the website, marked by a `rel` attribute of "search" in the `link` tag.
+    
+10. **Link**: A generic category for other types of links not specifically categorized. This includes any `link` element that doesn't match the predefined `rel` attribute values listed above.
+    
+11. **Subtitle**: Identified by the `track` tag, subtitle resources are used for providing captions or subtitles for audio or video content.
+    
+12. **Video**: This type is identified by the `video` tag, allowing videos to be embedded directly into webpages for in-browser viewing.
 
 _Sha256_
+This is the SHA-256 value of the resource in question.  
 
 _Simhash_
+This is the simhash of the resource in question. Again, a [GO-implementation](https://github.com/mfonda/simhash) of [Charikar's simhash algorithm](https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/CharikarEstim.pdf) is used to generate the hash to provide a standardize fingerprint of the resource artefact. 
 
 _Relations_
+This number denotes how many Selectors (ref xx.) this particular Resource artefact has been observed on based on its SHA256-value. Clicking the number will open a pane that displays where exactly Webscout has observed the resource. 
+
 
 ### Requests
 
