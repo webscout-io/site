@@ -94,7 +94,7 @@ _URL View_
 ![Screenshot 2024-01-31 164920](https://github.com/webscout-io/site/assets/47919173/88a9f487-044d-4f62-92fd-5caee2555973)
 _Domain View_
 
-![Screenshot 2024-01-31 164920](https://github.com/webscout-io/site/assets/47919173/6d419eeb-ba7a-4237-bc31-13f51963a312)
+![Screenshot 2024-01-31 165812](https://github.com/webscout-io/site/assets/47919173/8a048996-5ec8-48a9-a872-77b0fe3cb8e1)
 _IP-address View_
 
 Views are designed to streamline the process of shifting between the different Artefacts of relevance to your investigation. They seek to make it  easy and intuitive to pivot and connect otherwise seemingly unrelated systems on the internet. 
