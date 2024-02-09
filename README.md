@@ -10,13 +10,7 @@ This page outlines all the features that are presently in production and accessi
 
 ## 2.1 Ontology 
 
-The Webscout world comprises three interconnected ontological components: Selectors, Artefacts, and Fingerprints. **Selectors** refer to the web elements that our search engine can process, which currently include URLs, domain names, and IP addresses. **Artefacts** represent the technical information our search engine identifies about the searched selector. Lastly, **Fingerprints** are artefacts processed in a way that makes it possible to identify, classify, and pivot between related systems on the internet.  
-
-
-> [!Question]
-> So if I identify an interesting fingerprint on a selector and then search on that fingerprint in the search engine, doesn't that make the fingerprint a selector? 🤔 
-
-Well... yes. Bear with us. Hopefully it will all makes sense when you get started with Webscout. For now, the most important thing to note is that Webscout is an online tool to make sense of URLs, Domain Names, and IP-addresses. The next couple of sections will delve deeper into the ontological concepts of Selectors, Artefacts, and Fingerprints to offer a more comprehensive understanding of these components work in our system.
+There are three distinct yet interconnected concepts that are important to understand when using Webscout: Selectors, Artefacts, and Fingerprints. If you have prior experience with (cyber) intelligence or OSINT analysis, these are most likely very familiar to you. **Selectors** refer to the inputs that our search engine can process, which currently include URLs, domain names, and IP addresses. **Artefacts** represent the technical information our search engine identifies about the searched selector, and **Fingerprints** are artefacts processed in a way that makes it possible to identify, classify, and pivot between related systems on the internet.    
 
 ### 2.1.1 Selectors
 
@@ -28,11 +22,8 @@ Webscout adopts the term "Selector" from traditional intelligence analysis. In t
 > 
 > *We can then cross reference that selector in other data for greater refinement and enrichment.*
 
-Selectors serve as the primary means to query and access relevant information from our search engine. Here, each selector has its own unique View, which will be described in greater detail later in the documentation. Our search engine currently supports three types of selectors: 
+Selectors serve as the primary means to query and access relevant information from our search engine. Each selector has its own unique search engine View. 
 
-- URLs (for example `https://www.example.com/cms/shell.php`)
-- Domains (for example `example.com`)
-- IP-addresses (for example `93.184.216.34`)
 ### 2.1.2 Artefacts
 
 Webscout uses the concept of "Artefacts" to refer to the range of technical details, digital evidence, and fingerprints gathered about a specific Selector. For example, a search on an URL yields the following URL artefacts:
@@ -84,9 +75,15 @@ A more efficient approach involves condensing all the headers into a single stri
 
 Fingerprints are instrumental in the identification, categorization, and tracking of web entities. They are a cornerstone of threat detection and analysis, uncovering both subtle and overt anomalies and patterns in web traffic and server responses. Effective fingerprinting and the ability to pivot seamlessly between different types of artifacts are the bread and butter of  cyber threat intelligence, and we hope you will have fun deploying these techniques to identify evil with Webscout.
 
+> [!Question]
+> So if I identify an interesting fingerprint on a selector search and then use this fingerprint to pivot to potentially related selectors, doesn't it make the fingerprint itself a selector? 🤔 
+
+Well... yes. Bear with us. Hopefully it will all makes sense when you get started with Webscout. For now, the most important thing to understand is that Webscout is a cyber intelligence search engine that currently takes URLs, Domain Names, and IP-addresses as input. 
+
+
 ## 2.2 Views
 
-Views are the user interfaces that display the results (the *Artefacts*) from your searches. Views are designed to organize and present the most relevant information about the searched selector. As such, each searchable selector (currently URLs, Domain Names, and IP-addresses) has its own dedicated **View** which you are automatically directed to upon conducting a search.  
+Views are the user interfaces that organize and display the *Artefacts* our search engine was able to identify  selector you have searched. Views are designed to organize and present the most relevant information about the searched selector. As such, each searchable selector (currently URLs, Domain Names, and IP-addresses) has its own dedicated **View** which you are automatically directed to upon conducting a search.  
 
 ![Screenshot 2024-01-31 164504](https://github.com/webscout-io/site/assets/47919173/d43583a7-23a1-4a3f-98a0-daef17352892)
 _URL View_
