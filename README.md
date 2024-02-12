@@ -111,7 +111,7 @@ This score is derived from our AI model which is based on [Gradient Boosting](ht
 The score is still highly experimental and should not be regarded as a source of truth. A low Phishing Probability score does _NOT_ definitively confirm the safety of the URL you have searched.
 
 ### 3.5 Fingerprints
-This section contains the various [fingerprints](https://github.com/webscout-io/site/blob/main/README.md#213-fingerprints) that Webscout dusted from the URL. Webscout currently computes the following fingerprints: 
+This section contains the various fingerprints that Webscout dusted from the URL. Webscout currently computes the following fingerprints: 
 
 - HTTP Fingerprint
 - Server Jarm 
