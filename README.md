@@ -202,10 +202,10 @@ This is the SHA-256 value of the resource in question.
 This is the simhash of the resource in question. Again, a [GO-implementation](https://github.com/mfonda/simhash) of [Charikar's simhash algorithm](https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/CharikarEstim.pdf) is used to generate the hash to provide a standardize fingerprint of the resource artefact. 
 
 #### 3.6.4 Relations
-This number indicates how many [Selectors](https://github.com/webscout-io/site/blob/main/README.md#211-selectors) this particular Resource artefact has been observed on (based on its SHA256-value). Clicking the number will open a pane that displays where exactly Webscout has observed the resource. 
+This number indicates how many [Selectors](#211-selectors) this particular Resource artefact has been observed on (based on its SHA256-value). Clicking the number will open a pane that displays where exactly Webscout has observed the resource. 
 
 ### 3.7 Requests
-This section details requests for external resources initiated by visiting the provided URL through a browser. In this context, "external" just means that the request was made to "somewhere else" on the web, in contrast to the [Inline Resources](https://github.com/webscout-io/site/blob/main/README.md#211-selectors) described previously. This includes resources from different subdomains or URLs, even if they belong to the same domain as the provided URL.
+This section details requests for external resources initiated by visiting the provided URL through a browser. In this context, "external" just means that the request was made to "somewhere else" on the web, in contrast to the [Inline Resources](#211-selectors) described previously. This includes resources from different subdomains or URLs, even if they belong to the same domain as the provided URL.
 
 Why would one want to pay attention to the requests a URL makes upon loading it? Here is a short list of examples. 
 
@@ -287,7 +287,7 @@ Social media links and handles carved from the rendered page source. Largely bas
 The [HTTP cookies](https://en.wikipedia.org/wiki/HTTP_cookie) that were set by the website. The lock icon indicates whether the cookie is secure or not. A _secure cookie_ can only be transmitted over an encrypted connection (i.e. [HTTPS](https://en.wikipedia.org/wiki/HTTP_Secure "HTTP Secure")). They cannot be transmitted over unencrypted connections (i.e. [HTTP](https://en.wikipedia.org/wiki/HTTP "HTTP")). A cookie is made secure by adding the `Secure` flag to the cookie.
 
 ### 3.14 Linked Domains
-Domains embedded in the URL's [Inline Resources](https://github.com/webscout-io/site/blob/main/README.md#inline-resources). More specifically the [hyperlinks](https://en.wikipedia.org/wiki/Hyperlink) that were carved from the rendered HTML's `href` sections, forms, etc.
+Domains embedded in the URL's [Inline Resources](#inline-resources). More specifically the [hyperlinks](https://en.wikipedia.org/wiki/Hyperlink) that were carved from the rendered HTML's `href` sections, forms, etc.
 
 
 ---
