@@ -305,12 +305,12 @@ This is the size (in bytes) of  the external resource that was requested. Import
 
 
 
-## 3.7.7 IP
+### 3.7.7 IP
 This is the IP-address that hosts the domain that the external resource was requested from; the domain's [DNS A record](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/). 
 
 
 
-## 3.8 Page Extracts
+### 3.8 Page Extracts
 Potentially sensitive data extracted from the URL, such as leaked API keys, IP addresses, e-mails, etc. Like other regex-based extractors, it is prone make somewhat whack, albeit theoretically correct, identifications. For example, it might extract "`::`" as an IP version 6 address. And although `::` technically is a valid IP6 address, it is unlikely to be an IP version 6 address in the context it was extracted from. Same goes with API keys and the other types of digital "nuggets" we extract. If you want to learn more about this type of analysis, go check projects such as [trufflehog](https://github.com/trufflesecurity/trufflehog). 
 
 
